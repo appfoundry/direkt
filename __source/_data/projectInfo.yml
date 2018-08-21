@@ -1,0 +1,7 @@
+name: "Direkt"
+
+status:
+  podName: "Direkt"
+  supportsCarthage: true
+
+githubRepoName: "Direkt"

@@ -1,0 +1,15 @@
+.bundle
+.sass-cache
+_site
+Gemfile.lock
+_sass/bootstrap-sass/assets/fonts
+_sass/bootstrap-sass/assets/javascripts
+_sass/bootstrap-sass/assets/images
+_sass/font-awesome/less
+_sass/font-awesome/css
+_sass/font-awesome/src
+_sass/font-awesome/fonts
+*.gem
+assets/vendor/*
+!assets/vendor/.gitkeep
+node_modules
