@@ -1,0 +1,7 @@
+included:
+    - Direkt
+    - DirektTests
+    - Example/DirektExample
+line_length:
+    warning: 140
+
