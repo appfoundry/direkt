@@ -278,6 +278,7 @@ header {
   transition: all 0.75s ease; }
   header .brand {
     margin-top: 1em;
+    margin-left: 1.5em;
     display: flex;
     flex-direction: column; }
     header .brand .tagline {
@@ -655,6 +656,8 @@ body, #body, html {
   display: block;
   border: 1px solid white; }
 
-.logo {
+header .logo {
   background-color: white;
-  border-radius: 30px; }
+  border-radius: 30px;
+  width: 150px;
+  height: 150px; }

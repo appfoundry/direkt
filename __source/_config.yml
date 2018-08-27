@@ -12,7 +12,7 @@ logo:
   brand:
     name: "Direkt"
     punchline: "iOS Navigation library written in Swift"
-  svgId: ""
-  pngFile: "direkt_logo.png"
+  svgId: "DirektLogo"
+  pngFile: ""
 
 headerImage: "direkt_logo.png"
