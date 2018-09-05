@@ -10,7 +10,7 @@ import UIKit
 
 class DismissingNavigator: Navigator {
 
-    func navigate(using input: Void, from hostViewController: UIViewController, factory: ViewControllerFactory) {
+    func navigate(using input: Void, from hostViewController: UIViewController, resolver: Resolver) {
         let presentingViewController = hostViewController.presentingViewController
 
         presentingViewController?.dismiss(animated: true)

@@ -8,7 +8,7 @@
 import Foundation
 import Swinject
 
-extension Resolver {
+extension Swinject.Resolver {
 
     func resolve<T, E>(_ path: ReferenceWritableKeyPath<T, E>, in object: T) {
         return object[keyPath: path] = resolve(E.self)!

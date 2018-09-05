@@ -10,10 +10,10 @@ import UIKit
 
 final class GUICreator: GUICreatable {
 
-    func createWindow(viewControllerFactory: ViewControllerFactory) -> UIWindow {
+    func createWindow(resolver: Direkt.Resolver) -> UIWindow {
         let window = UIWindow(frame: UIScreen.main.bounds)
 
-        let controller = try! viewControllerFactory.makeViewController(ofType: MainViewController.self)
+        let controller = try! resolver.resolve(MainViewController.self)
 
         let navigationController = UINavigationController(rootViewController: controller)
         window.rootViewController = navigationController

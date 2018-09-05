@@ -10,5 +10,5 @@ import UIKit
 
 protocol GUICreatable {
 
-    func createWindow(viewControllerFactory: ViewControllerFactory) -> UIWindow
+    func createWindow(resolver: Direkt.Resolver) -> UIWindow
 }

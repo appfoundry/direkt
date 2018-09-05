@@ -10,10 +10,10 @@ import Swinject
 
 class NavigatorAssembly: Assembly {
 
-    let viewControllerFactory: ViewControllerFactory
+    let resolver: Direkt.Resolver
 
-    init(viewControllerFactory: ViewControllerFactory) {
-        self.viewControllerFactory = viewControllerFactory
+    init(resolver: Direkt.Resolver) {
+        self.resolver = resolver
     }
 
     func assemble(container: Container) {

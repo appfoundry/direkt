@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private var guiCreatable: GUICreatable?
 
-    private let factory: Factory = SwinjectFactory()
+    private let resolver: Direkt.Resolver = SwinjectResolver()
 
     func application(
         _ application: UIApplication,
@@ -29,8 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func setupGUI() {
-        guiCreatable = self.factory.guiCreatable
-        self.window = guiCreatable?.createWindow(viewControllerFactory: self.factory)
+        guiCreatable = try! self.resolver.resolve(GUICreatable.self)
+        self.window = guiCreatable?.createWindow(resolver: self.resolver)
         self.window?.makeKeyAndVisible()
     }
 }

@@ -10,15 +10,15 @@ import Swinject
 
 final class ManagerAssembly: Assembly {
 
-    let factory: ViewControllerFactory & NavigatorFactory
+    let resolver: Direkt.Resolver
 
-    init(factory: ViewControllerFactory & NavigatorFactory) {
-        self.factory = factory
+    init(resolver: Direkt.Resolver) {
+        self.resolver = resolver
     }
 
     func assemble(container: Swinject.Container) {
-        container.register(NavigationManager.self) { [factory] _ in
-            BaseNavigationManager(viewControllerFactory: factory, navigatorFactory: factory)
+        container.register(NavigationManager.self) { [resolver] _ in
+            BaseNavigationManager(resolver: resolver)
         }.inObjectScope(.container)
     }
 }

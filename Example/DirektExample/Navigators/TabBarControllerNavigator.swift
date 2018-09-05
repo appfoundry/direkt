@@ -9,10 +9,10 @@ import UIKit
 
 class TabBarControllerNavigator: Navigator {
 
-    func navigate(using input: Int, from hostViewController: UIViewController, factory: ViewControllerFactory) throws {
+    func navigate(using input: Int, from hostViewController: UIViewController, resolver: Resolver) throws {
         let tab = UITabBarController()
         tab.viewControllers = try (0 ..< input).map { _ in
-            try factory.makeViewController(ofType: InTabViewController.self)
+            try resolver.resolve(InTabViewController.self)
         }
 
         hostViewController.navigationController!.pushViewController(tab, animated: true)
