@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Direkt"
-  s.version          = "1.0.0"
+  s.version          = "1.1.0"
   s.summary          = "Navigation manager to separate navigation logic from your core app code, when not using Storyboard segues."
   s.description      = <<-DESC
 This is a Swift port of [DRYNavigationManager](https://github.com/appfoundry/DRYNavigationManager)
