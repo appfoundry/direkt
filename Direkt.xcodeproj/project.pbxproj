@@ -9,14 +9,13 @@
 /* Begin PBXBuildFile section */
 		2D0E0941212C4AFC009BC753 /* Direkt.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D0E093C212C4A03009BC753 /* Direkt.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2D4167C7212C17AB005BB098 /* Direkt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4167BD212C17AB005BB098 /* Direkt.framework */; };
-		2D4167DD212C17D9005BB098 /* ViewControllerFactory+OptionalParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4167D7212C17D9005BB098 /* ViewControllerFactory+OptionalParameters.swift */; };
+		2D4167DD212C17D9005BB098 /* Resolver+OptionalParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4167D7212C17D9005BB098 /* Resolver+OptionalParameters.swift */; };
 		2D4167DE212C17D9005BB098 /* BaseNavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4167D8212C17D9005BB098 /* BaseNavigationManager.swift */; };
-		2D4167DF212C17D9005BB098 /* NavigatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4167D9212C17D9005BB098 /* NavigatorFactory.swift */; };
-		2D4167E0212C17D9005BB098 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4167DA212C17D9005BB098 /* ViewControllerFactory.swift */; };
+		2D4167DF212C17D9005BB098 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4167D9212C17D9005BB098 /* Resolver.swift */; };
 		2D4167E1212C17D9005BB098 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4167DB212C17D9005BB098 /* Navigator.swift */; };
 		2D4167E2212C17D9005BB098 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4167DC212C17D9005BB098 /* NavigationManager.swift */; };
 		2D4167E7212C17F8005BB098 /* MethodCallMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4167E3212C17F7005BB098 /* MethodCallMock.swift */; };
-		2D4167E8212C17F8005BB098 /* ViewControllerFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4167E4212C17F8005BB098 /* ViewControllerFactoryTests.swift */; };
+		2D4167E8212C17F8005BB098 /* ResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4167E4212C17F8005BB098 /* ResolverTests.swift */; };
 		2D4167E9212C17F8005BB098 /* NavigatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4167E5212C17F8005BB098 /* NavigatorTests.swift */; };
 		2D4167EA212C17F8005BB098 /* NavigationStackMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4167E6212C17F8005BB098 /* NavigationStackMock.swift */; };
 		2D4167EE212C18DB005BB098 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4167EC212C18DB005BB098 /* Nimble.framework */; };
@@ -39,14 +38,13 @@
 		2D4167C1212C17AB005BB098 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D4167C6212C17AB005BB098 /* DirektTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DirektTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D4167CD212C17AB005BB098 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2D4167D7212C17D9005BB098 /* ViewControllerFactory+OptionalParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewControllerFactory+OptionalParameters.swift"; sourceTree = "<group>"; };
+		2D4167D7212C17D9005BB098 /* Resolver+OptionalParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Resolver+OptionalParameters.swift"; sourceTree = "<group>"; };
 		2D4167D8212C17D9005BB098 /* BaseNavigationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationManager.swift; sourceTree = "<group>"; };
-		2D4167D9212C17D9005BB098 /* NavigatorFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorFactory.swift; sourceTree = "<group>"; };
-		2D4167DA212C17D9005BB098 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
+		2D4167D9212C17D9005BB098 /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
 		2D4167DB212C17D9005BB098 /* Navigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		2D4167DC212C17D9005BB098 /* NavigationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		2D4167E3212C17F7005BB098 /* MethodCallMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MethodCallMock.swift; sourceTree = "<group>"; };
-		2D4167E4212C17F8005BB098 /* ViewControllerFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFactoryTests.swift; sourceTree = "<group>"; };
+		2D4167E4212C17F8005BB098 /* ResolverTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResolverTests.swift; sourceTree = "<group>"; };
 		2D4167E5212C17F8005BB098 /* NavigatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorTests.swift; sourceTree = "<group>"; };
 		2D4167E6212C17F8005BB098 /* NavigationStackMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationStackMock.swift; sourceTree = "<group>"; };
 		2D4167EC212C18DB005BB098 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
@@ -99,9 +97,8 @@
 				2D4167D8212C17D9005BB098 /* BaseNavigationManager.swift */,
 				2D4167DC212C17D9005BB098 /* NavigationManager.swift */,
 				2D4167DB212C17D9005BB098 /* Navigator.swift */,
-				2D4167D9212C17D9005BB098 /* NavigatorFactory.swift */,
-				2D4167DA212C17D9005BB098 /* ViewControllerFactory.swift */,
-				2D4167D7212C17D9005BB098 /* ViewControllerFactory+OptionalParameters.swift */,
+				2D4167D9212C17D9005BB098 /* Resolver.swift */,
+				2D4167D7212C17D9005BB098 /* Resolver+OptionalParameters.swift */,
 				2D0E093C212C4A03009BC753 /* Direkt.h */,
 				2D4167C1212C17AB005BB098 /* Info.plist */,
 			);
@@ -114,7 +111,7 @@
 				2D4167E3212C17F7005BB098 /* MethodCallMock.swift */,
 				2D4167E6212C17F8005BB098 /* NavigationStackMock.swift */,
 				2D4167E5212C17F8005BB098 /* NavigatorTests.swift */,
-				2D4167E4212C17F8005BB098 /* ViewControllerFactoryTests.swift */,
+				2D4167E4212C17F8005BB098 /* ResolverTests.swift */,
 				2D4167CD212C17AB005BB098 /* Info.plist */,
 			);
 			path = DirektTests;
@@ -277,9 +274,8 @@
 			files = (
 				2D4167DE212C17D9005BB098 /* BaseNavigationManager.swift in Sources */,
 				2D4167E1212C17D9005BB098 /* Navigator.swift in Sources */,
-				2D4167E0212C17D9005BB098 /* ViewControllerFactory.swift in Sources */,
-				2D4167DF212C17D9005BB098 /* NavigatorFactory.swift in Sources */,
-				2D4167DD212C17D9005BB098 /* ViewControllerFactory+OptionalParameters.swift in Sources */,
+				2D4167DF212C17D9005BB098 /* Resolver.swift in Sources */,
+				2D4167DD212C17D9005BB098 /* Resolver+OptionalParameters.swift in Sources */,
 				2D4167E2212C17D9005BB098 /* NavigationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,7 +287,7 @@
 				2D4167E7212C17F8005BB098 /* MethodCallMock.swift in Sources */,
 				2D4167E9212C17F8005BB098 /* NavigatorTests.swift in Sources */,
 				2D4167EA212C17F8005BB098 /* NavigationStackMock.swift in Sources */,
-				2D4167E8212C17F8005BB098 /* ViewControllerFactoryTests.swift in Sources */,
+				2D4167E8212C17F8005BB098 /* ResolverTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

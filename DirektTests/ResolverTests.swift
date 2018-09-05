@@ -1,5 +1,5 @@
 //
-//  ViewControllerFactoryTests.swift
+//  ResolverTests.swift
 //  DirektTests
 //
 //  Copyright © 2018 AppFoundry. All rights reserved.
@@ -11,23 +11,23 @@ import Quick
 import Nimble
 @testable import Direkt
 
-class ViewControllerFactorySpec: QuickSpec {
+class ResolverSpec: QuickSpec {
 
     override func spec() {
         describe("ViewControllerFactorySpec") {
-            var factory: MockFactory!
+            var resolver: MockResolver!
 
             beforeEach {
-                factory = MockFactory(navigators: [])
+                resolver = MockResolver(navigators: [])
             }
 
             it("handles optional parameters") {
-                expect { try factory.makeViewController(ofType: MockViewController.self) }
+                expect { try resolver.resolve(MockViewController.self) }
                     .notTo(throwError())
 
                 expect(
-                    factory.didCall(
-                        .makeViewController(MockViewController.self, input: nil)
+                    resolver.didCall(
+                        .resolve(MockViewController.self, input: nil)
                     )
                 ).to(beTrue())
             }

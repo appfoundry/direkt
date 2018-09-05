@@ -10,19 +10,17 @@ import UIKit
 
 open class BaseNavigationManager: NavigationManager {
 
-    private let viewControllerFactory: ViewControllerFactory
-    private let navigatorFactory: NavigatorFactory
+    private let resolver: Resolver
 
-    public init(viewControllerFactory: ViewControllerFactory, navigatorFactory: NavigatorFactory) {
-        self.viewControllerFactory = viewControllerFactory
-        self.navigatorFactory = navigatorFactory
+    public init(resolver: Resolver) {
+        self.resolver = resolver
     }
 
     open func navigate<T: Navigator>(to navigator: T.Type, using input: T.Input, from hostViewController: UIViewController) {
         do {
-            try navigatorFactory
-                .makeNavigator(ofType: navigator)
-                .navigate(using: input, from: hostViewController, factory: viewControllerFactory)
+            try resolver
+                .resolve(navigator)
+                .navigate(using: input, from: hostViewController, resolver: resolver)
         } catch {
             didFailNavigation(to: navigator, error: error, hostViewController: hostViewController)
         }

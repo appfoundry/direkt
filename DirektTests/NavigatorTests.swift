@@ -17,28 +17,28 @@ class NavigationManagerSpec: QuickSpec {
         let mockHost = UIViewController()
 
         describe("NavigationManagerSpec") {
-            var factory: MockFactory!
+            var resolver: MockResolver!
             var manager: MockNavigationManager!
             var navigator: MockNavigator<String>!
 
             beforeEach {
                 navigator = MockNavigator()
-                factory = MockFactory(navigators: [navigator, MockNavigator<Void>()])
-                manager = MockNavigationManager(viewControllerFactory: factory, navigatorFactory: factory)
+                resolver = MockResolver(navigators: [navigator, MockNavigator<Void>()])
+                manager = MockNavigationManager(resolver: resolver)
             }
 
             context("ready for testing") {
                 it("is able to create navigation actors") {
-                    expect { try factory.makeViewController(ofType: MockViewController.self, input: "mock") }
+                    expect { try resolver.resolve(MockViewController.self, input: "mock") }
                         .notTo(throwError())
-                    expect { try factory.makeNavigator(ofType: MockNavigator<String>.self) }
+                    expect { try resolver.resolve(MockNavigator<String>.self) }
                         .notTo(throwError())
-                    expect { try factory.makeNavigator(ofType: MockNavigator<Void>.self) }
+                    expect { try resolver.resolve(MockNavigator<Void>.self) }
                         .notTo(throwError())
                 }
 
                 it("fails to handle non trivial navigators") {
-                    expect { try factory.makeNavigator(ofType: MockNavigator<Int>.self) }
+                    expect { try resolver.resolve(MockNavigator<Int>.self) }
                         .to(throwError())
 
                     manager.navigate(to: MockNavigator<Int>.self, using: 0, from: mockHost)
@@ -46,7 +46,7 @@ class NavigationManagerSpec: QuickSpec {
                         manager.didCall(
                             .didFailNavigation(
                                 MockNavigator<Int>.self,
-                                MockFactory.Error.unkownNavigatorType(MockNavigator<Int>.self),
+                                MockResolver.Error.unkownType(MockNavigator<Int>.self),
                                 mockHost
                             )
                         )
@@ -71,14 +71,14 @@ class NavigationManagerSpec: QuickSpec {
 
                 it("resolves dependencies") {
                     expect(
-                        factory.didCall(
-                            .makeNavigator(MockNavigator<String>.self)
+                        resolver.didCall(
+                            .resolve(MockNavigator<String>.self, input: nil as Void?)
                         )
                     ).to(beTrue())
 
                     expect(
-                        factory.didCall(
-                            .makeViewController(MockViewController.self, input: "mock")
+                        resolver.didCall(
+                            .resolve(MockViewController.self, input: "mock")
                         )
                     ).to(beTrue())
                 }
@@ -92,7 +92,7 @@ class NavigationManagerSpec: QuickSpec {
 
                     expect(
                         navigator.didCall(
-                            .navigate("mock", hostViewController: mockHost, factory: factory)
+                            .navigate("mock", hostViewController: mockHost, resolver: resolver)
                         )
                     ).to(beTrue())
                 }

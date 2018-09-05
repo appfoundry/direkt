@@ -14,49 +14,44 @@ class MockNavigator<T>: MethodCallMock, Navigator {
 
     enum MethodCall: Equatable {
 
-        case navigate(T, hostViewController: UIViewController, factory: ViewControllerFactory)
+        case navigate(T, hostViewController: UIViewController, resolver: Resolver)
 
         static func == (lhs: MethodCall, rhs: MethodCall) -> Bool {
             switch (lhs, rhs) {
             case let (.navigate(lhsVal), .navigate(rhsVal)):
                 return type(of: lhsVal.0) == type(of: lhsVal.0)
                     && lhsVal.hostViewController == rhsVal.hostViewController
-                    && type(of: lhsVal.factory) == type(of: rhsVal.factory)
+                    && type(of: lhsVal.resolver) == type(of: rhsVal.resolver)
             }
         }
     }
 
     var calls: [MethodCall] = []
 
-    func navigate(using input: T, from hostViewController: UIViewController, factory: ViewControllerFactory) throws {
-        _ = try factory.makeViewController(ofType: MockViewController.self, input: input)
-        makeCall(.navigate(input, hostViewController: hostViewController, factory: factory))
+    func navigate(using input: T, from hostViewController: UIViewController, resolver: Resolver) throws {
+        _ = try resolver.resolve(MockViewController.self, input: input)
+        makeCall(.navigate(input, hostViewController: hostViewController, resolver: resolver))
     }
 }
 
-class MockFactory: MethodCallMock, ViewControllerFactory, NavigatorFactory {
+class MockResolver: MethodCallMock, Resolver {
 
     enum MethodCall: Equatable {
 
-        case makeNavigator(Any.Type)
-        case makeViewController(UIViewController.Type, input: Any?)
+        case resolve(Any.Type, input: Any?)
 
         static func == (lhs: MethodCall, rhs: MethodCall) -> Bool {
             switch (lhs, rhs) {
-            case let (.makeNavigator(lhsVal), .makeNavigator(rhsVal)):
-                return lhsVal == rhsVal
-            case let (.makeViewController(lhsVal), .makeViewController(rhsVal)):
+            case let (.resolve(lhsVal), .resolve(rhsVal)):
                 return lhsVal.0 == rhsVal.0
                     && lhsVal.input.map { type(of: $0) } == rhsVal.input.map { type(of: $0) }
-            default:
-                return false
             }
         }
     }
 
     enum Error: Swift.Error {
 
-        case unkownNavigatorType(Any.Type)
+        case unkownType(Any.Type)
     }
 
     private let navigators: [Any]
@@ -67,20 +62,23 @@ class MockFactory: MethodCallMock, ViewControllerFactory, NavigatorFactory {
         self.navigators = navigators.compactMap { $0 }
     }
 
-    func makeViewController<T: UIViewController, E>(ofType type: T.Type, input: E?) throws -> T {
-        let res = T()
-        makeCall(.makeViewController(type, input: input))
-        return res
-    }
+    func resolve<T, Input>(_ type: T.Type, input: Input?) throws -> T {
+        makeCall(.resolve(type, input: input))
 
-    func makeNavigator<T: Navigator>(ofType type: T.Type) throws -> T {
-        guard let instance = self.navigators.first(where: { Swift.type(of: $0) == T.self }).flatMap({ $0 as? T }) else {
-            throw Error.unkownNavigatorType(type)
+        guard let vcType = type as? UIViewController.Type else {
+
+            guard let instance = self.navigators.first(where: { Swift.type(of: $0) == T.self }).flatMap({ $0 as? T }) else {
+                throw Error.unkownType(type)
+            }
+
+            return instance
         }
 
-        makeCall(.makeNavigator(type))
-
-        return instance
+        if let instance = vcType.init() as? T {
+            return instance
+        } else {
+            throw Error.unkownType(type)
+        }
     }
 }
 
