@@ -128,20 +128,20 @@ It follows same architectural concept, but leverages Swift programming technique
 <ul>
   <li><code class="highlighter-rouge">Navigator</code> - Core objects responsible for navigation flow. Their task is to run the transition code e.g. pushing a view controller onto the navigation stack.</li>
   <li><code class="highlighter-rouge">NavigationManager</code> - The task of those objects, as the name suggests, is to manage navigators. Meaning the object will need to create given navigator instance upon navigation request. <code class="highlighter-rouge">BaseNavigationManager</code> is an open implementaion of the protocol that you can use directly or extend.</li>
-  <li>Few other helper types like <code class="highlighter-rouge">ViewControllerFactory</code>, <code class="highlighter-rouge">NavigatorFactory</code> which serve as abstraction for dependencies resolution.</li>
+  <li><code class="highlighter-rouge">Resolver</code> protocol type used for dependencies resolution.</li>
 </ul>
 
 <p>Example implementation of <code class="highlighter-rouge">Navigator</code> pushing a view controller onto the navigation stack:</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">navigate</span><span class="p">(</span><span class="n">using</span> <span class="nv">input</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">from</span> <span class="nv">hostViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="nv">factory</span><span class="p">:</span> <span class="kt">ViewControllerFactory</span><span class="p">)</span> <span class="k">throws</span> <span class="p">{</span>
-	<span class="k">guard</span> <span class="k">let</span> <span class="nv">navigationController</span> <span class="o">=</span> <span class="n">hostViewController</span><span class="o">.</span><span class="n">navigationController</span> <span class="k">else</span> <span class="p">{</span>
-		<span class="k">throw</span> <span class="kt">Error</span><span class="o">.</span><span class="n">missingNavigationController</span>
-	<span class="p">}</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">navigate</span><span class="p">(</span><span class="n">using</span> <span class="nv">input</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">from</span> <span class="nv">hostViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="nv">resolver</span><span class="p">:</span> <span class="kt">Resolver</span><span class="p">)</span> <span class="k">throws</span> <span class="p">{</span>
+    <span class="k">guard</span> <span class="k">let</span> <span class="nv">navigationController</span> <span class="o">=</span> <span class="n">hostViewController</span><span class="o">.</span><span class="n">navigationController</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="kt">Error</span><span class="o">.</span><span class="n">missingNavigationController</span>
+    <span class="p">}</span>
 
-	<span class="k">try</span> <span class="n">navigationController</span><span class="o">.</span><span class="nf">pushViewController</span><span class="p">(</span>
-		<span class="n">factory</span><span class="o">.</span><span class="nf">makeViewController</span><span class="p">(</span><span class="nv">ofType</span><span class="p">:</span> <span class="kt">HelloViewController</span><span class="o">.</span><span class="k">self</span><span class="p">,</span> <span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">),</span>
-		<span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span>
-	<span class="p">)</span>
+    <span class="k">try</span> <span class="n">navigationController</span><span class="o">.</span><span class="nf">pushViewController</span><span class="p">(</span>
+        <span class="n">resolver</span><span class="o">.</span><span class="nf">resolve</span><span class="p">(</span><span class="kt">HelloViewController</span><span class="o">.</span><span class="k">self</span><span class="p">,</span> <span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">),</span>
+        <span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div></div>
 

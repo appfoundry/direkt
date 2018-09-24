@@ -15,20 +15,20 @@ Library defines a few core protocols that the users will be working with:
 
 - `Navigator` - Core objects responsible for navigation flow. Their task is to run the transition code e.g. pushing a view controller onto the navigation stack.
 - `NavigationManager` - The task of those objects, as the name suggests, is to manage navigators. Meaning the object will need to create given navigator instance upon navigation request. `BaseNavigationManager` is an open implementaion of the protocol that you can use directly or extend.
-- Few other helper types like `ViewControllerFactory`, `NavigatorFactory` which serve as abstraction for dependencies resolution.
+- `Resolver` protocol type used for dependencies resolution.
 
 Example implementation of `Navigator` pushing a view controller onto the navigation stack:
 
 ```swift
-func navigate(using input: String, from hostViewController: UIViewController, factory: ViewControllerFactory) throws {
-	guard let navigationController = hostViewController.navigationController else {
-		throw Error.missingNavigationController
-	}
+func navigate(using input: String, from hostViewController: UIViewController, resolver: Resolver) throws {
+    guard let navigationController = hostViewController.navigationController else {
+        throw Error.missingNavigationController
+    }
 
-	try navigationController.pushViewController(
-		factory.makeViewController(ofType: HelloViewController.self, input: input),
-		animated: true
-	)
+    try navigationController.pushViewController(
+        resolver.resolve(HelloViewController.self, input: input),
+        animated: true
+    )
 }
 ```
 
