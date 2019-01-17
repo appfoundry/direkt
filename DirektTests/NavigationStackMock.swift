@@ -28,7 +28,7 @@ class MockNavigator<T>: MethodCallMock, Navigator {
 
     var calls: [MethodCall] = []
 
-    func navigate(using input: T, from hostViewController: UIViewController, resolver: Resolver) throws {
+    func navigate(using input: T, from hostViewController: UIViewController, resolver: Resolver, manager: NavigationManager) throws {
         _ = try resolver.resolve(MockViewController.self, input: input)
         makeCall(.navigate(input, hostViewController: hostViewController, resolver: resolver))
     }
@@ -107,9 +107,9 @@ class MockNavigationManager: BaseNavigationManager, MethodCallMock {
 
     var calls: [MockNavigationManager.MethodCall] = []
 
-    override func navigate<T: Navigator>(to navigator: T.Type, using input: T.Input, from hostViewController: UIViewController) {
+    override func navigate<T: Navigator>(to navigator: T.Type, using input: T.Input, from hostViewController: UIViewController) throws {
         makeCall(.navigate(navigator, input: input, hostViewController: hostViewController))
-        super.navigate(to: navigator, using: input, from: hostViewController)
+        try super.navigate(to: navigator, using: input, from: hostViewController)
     }
 
     override func didFailNavigation<T: Navigator>(to navigator: T.Type, error: Error, hostViewController: UIViewController) {

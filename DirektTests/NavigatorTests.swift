@@ -41,7 +41,7 @@ class NavigationManagerSpec: QuickSpec {
                     expect { try resolver.resolve(MockNavigator<Int>.self) }
                         .to(throwError())
 
-                    manager.navigate(to: MockNavigator<Int>.self, using: 0, from: mockHost)
+                    manager.attemptNavigate(to: MockNavigator<Int>.self, using: 0, from: mockHost)
                     expect(
                         manager.didCall(
                             .didFailNavigation(
@@ -55,7 +55,7 @@ class NavigationManagerSpec: QuickSpec {
             }
 
             it("handles optional parameters") {
-                manager.navigate(to: MockNavigator<Void>.self, from: mockHost)
+                manager.attemptNavigate(to: MockNavigator<Void>.self, from: mockHost)
 
                 expect(
                     manager.didCall(
@@ -64,9 +64,21 @@ class NavigationManagerSpec: QuickSpec {
                 ).to(beTrue())
             }
 
+            context("navigation result") {
+                it("provides failed navigation error") {
+                    expect { try manager.navigate(to: MockNavigator<Double>.self, using: 0, from: mockHost) }
+                        .to(throwError(MockResolver.Error.unkownType(MockNavigator<String>.self)))
+                }
+
+                it("provides navigation result") {
+                    expect(manager.attemptNavigate(to: MockNavigator<Void>.self, from: mockHost)) == true
+                    expect(manager.attemptNavigate(to: MockNavigator<Double>.self, using: 0, from: mockHost)) == false
+                }
+            }
+
             context("performs navigation step") {
                 beforeEach {
-                    manager.navigate(to: MockNavigator<String>.self, using: "mock", from: mockHost)
+                    manager.attemptNavigate(to: MockNavigator<String>.self, using: "mock", from: mockHost)
                 }
 
                 it("resolves dependencies") {
