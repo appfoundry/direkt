@@ -1,7 +1,6 @@
 .bundle
 .sass-cache
 _site
-Gemfile.lock
 _sass/bootstrap-sass/assets/fonts
 _sass/bootstrap-sass/assets/javascripts
 _sass/bootstrap-sass/assets/images
@@ -13,3 +12,5 @@ _sass/font-awesome/fonts
 assets/vendor/*
 !assets/vendor/.gitkeep
 node_modules
+*.xcodeproj/
+Carthage/*
