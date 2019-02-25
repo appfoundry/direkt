@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/appfoundry/generic-framework-theme.git
-  revision: 7b3a6090f3f237d7abee8c485d8cce4c7d884f84
+  revision: 4203c7fd4f223155ce98f3f9fce814ba34ded4ae
   specs:
-    af-generic (0.2.0)
+    af-generic (0.2.1)
       github-pages (>= 167)
 
 GEM
@@ -224,7 +224,7 @@ GEM
       i18n
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
-    safe_yaml (1.0.4)
+    safe_yaml (1.0.5)
     sass (3.7.3)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
