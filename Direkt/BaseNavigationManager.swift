@@ -16,13 +16,18 @@ open class BaseNavigationManager: NavigationManager {
         self.resolver = resolver
     }
 
-    open func navigate<T: Navigator>(to navigator: T.Type, using input: T.Input, from hostViewController: UIViewController) {
+    open func attemptNavigate<T: Navigator>(
+        to navigator: T.Type,
+        using input: T.Input,
+        from hostViewController: UIViewController
+    ) throws {
         do {
             try resolver
                 .resolve(navigator)
                 .navigate(using: input, from: hostViewController, resolver: resolver)
         } catch {
             didFailNavigation(to: navigator, error: error, hostViewController: hostViewController)
+            throw error
         }
     }
 

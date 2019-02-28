@@ -59,9 +59,31 @@ class NavigationManagerSpec: QuickSpec {
 
                 expect(
                     manager.didCall(
-                        .navigate(MockNavigator<Void>.self, input: (), hostViewController: mockHost)
+                        .attemptNavigate(MockNavigator<Void>.self, input: (), hostViewController: mockHost)
                     )
                 ).to(beTrue())
+            }
+
+            it("handles optional parameters with failable navigation") {
+                try? manager.attemptNavigate(to: MockNavigator<Void>.self, from: mockHost)
+
+                expect(
+                    manager.didCall(
+                        .attemptNavigate(MockNavigator<Void>.self, input: (), hostViewController: mockHost)
+                    )
+                ).to(beTrue())
+            }
+
+            context("navigation result") {
+                it("provides failed navigation error") {
+                    expect { try manager.attemptNavigate(to: MockNavigator<Double>.self, using: 0, from: mockHost) }
+                        .to(throwError(MockResolver.Error.unkownType(MockNavigator<String>.self)))
+                }
+
+                it("provides navigation result") {
+                    expect(manager.navigate(to: MockNavigator<Void>.self, from: mockHost)) == true
+                    expect(manager.navigate(to: MockNavigator<Double>.self, using: 0, from: mockHost)) == false
+                }
             }
 
             context("performs navigation step") {
@@ -86,7 +108,7 @@ class NavigationManagerSpec: QuickSpec {
                 it("calls navigation methods") {
                     expect(
                         manager.didCall(
-                            .navigate(MockNavigator<String>.self, input: "mock", hostViewController: mockHost)
+                            .attemptNavigate(MockNavigator<String>.self, input: "mock", hostViewController: mockHost)
                         )
                     ).to(beTrue())
 
