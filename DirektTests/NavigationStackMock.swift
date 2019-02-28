@@ -86,12 +86,12 @@ class MockNavigationManager: BaseNavigationManager, MethodCallMock {
 
     enum MethodCall: Equatable {
 
-        case navigate(Any.Type, input: Any, hostViewController: UIViewController)
+        case attemptNavigate(Any.Type, input: Any, hostViewController: UIViewController)
         case didFailNavigation(Any.Type, Error, UIViewController)
 
         static func == (lhs: MethodCall, rhs: MethodCall) -> Bool {
             switch (lhs, rhs) {
-            case let (.navigate(lhs), .navigate(rhs)):
+            case let (.attemptNavigate(lhs), .attemptNavigate(rhs)):
                 return lhs.0 == rhs.0
                     && type(of: lhs.input) == type(of: rhs.input)
                     && lhs.hostViewController === rhs.hostViewController
@@ -107,9 +107,13 @@ class MockNavigationManager: BaseNavigationManager, MethodCallMock {
 
     var calls: [MockNavigationManager.MethodCall] = []
 
-    override func navigate<T: Navigator>(to navigator: T.Type, using input: T.Input, from hostViewController: UIViewController) {
-        makeCall(.navigate(navigator, input: input, hostViewController: hostViewController))
-        super.navigate(to: navigator, using: input, from: hostViewController)
+    override func attemptNavigate<T: Navigator>(
+        to navigator: T.Type,
+        using input: T.Input,
+        from hostViewController: UIViewController
+    ) throws {
+        makeCall(.attemptNavigate(navigator, input: input, hostViewController: hostViewController))
+        try super.attemptNavigate(to: navigator, using: input, from: hostViewController)
     }
 
     override func didFailNavigation<T: Navigator>(to navigator: T.Type, error: Error, hostViewController: UIViewController) {
