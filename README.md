@@ -40,7 +40,7 @@ func navigate(using input: String, from hostViewController: UIViewController, re
 ```
 
 ### Example
-In the repository you can find example project. 
+In the repository you can find an example project. 
 
 1. Clone the repository - `git clone https://github.com/appfoundry/direkt.git`
 2. Run `carthage build --platform iOS` from the `Example` directory
@@ -55,6 +55,11 @@ Add the line `pod "Direkt"` to your `Podfile`
 ### Carthage
 
 Add the line `github "appfoundry/direkt"` to your `Cartfile` and update your Carthage `copy-frameworks` script accordingly.
+
+### Swift Package Manager Support
+
+Direkt is also available through [Swift Package Manager](https://github.com/apple/swift-package-manager/).\n
+Swift Package Manager is now integrated into Xcode 11. You can add your package by going to "File" then "Swift Packages" then "Add Package Dependency..." Paste the repository's URL into the field above then click "next". Xcode will walk you through the rest of the steps. You can learn more at [this WWDC talk](https://developer.apple.com/videos/play/wwdc2019/408).
 
 ## Authors
 
